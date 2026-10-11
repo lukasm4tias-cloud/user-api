@@ -33,4 +33,4 @@ O projeto tem como objetivo praticar o desenvolvimento de aplicações back-end,
 
 Desenvolvedor de Software Júnior
 
-[Meu GitHub](https://github.com/lukasm4tias-cloud)
+[Meu GitHub](https://github.com/lukasm4tias-dev)
