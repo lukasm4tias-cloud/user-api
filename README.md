@@ -1,144 +1,70 @@
-# 🚀 User API — Java & Spring Boot
+# User API
 
-API REST para gerenciamento de usuários, desenvolvida com **Java 21, Spring Boot e PostgreSQL**, como parte dos meus estudos e aprimoramento em desenvolvimento Backend.
+API REST desenvolvida em Java 21 com Spring Boot para gerenciamento de usuários, utilizando PostgreSQL para persistência de dados.
 
-O projeto utiliza arquitetura em camadas, persistência de dados com Spring Data JPA e gerenciamento de migrações do banco de dados com Flyway.
+## Tecnologias
 
-## 🛠️ Tecnologias utilizadas
+- Java 21
+- Spring Boot 3.5.6
+- Spring Data JPA
+- PostgreSQL
+- Flyway
+- Maven
+- Docker
 
-- **Java 21** — Linguagem de programação
-- **Spring Boot 3.5.6** — Framework para desenvolvimento da API
-- **Spring Web** — Construção de endpoints REST
-- **Spring Data JPA** — Persistência de dados
-- **Hibernate** — Mapeamento objeto-relacional (ORM)
-- **PostgreSQL** — Banco de dados relacional
-- **Flyway** — Versionamento e migração do banco de dados
-- **Docker** — Execução do PostgreSQL em contêiner
-- **Maven** — Gerenciamento de dependências e build
-- **Git e GitHub** — Versionamento do código-fonte
-
-## 🏗️ Arquitetura do projeto
-
-A aplicação está organizada em camadas para separar responsabilidades:
-
-**Controller → Service → Repository → PostgreSQL**
-
-- **Controller:** recebe as requisições HTTP e retorna as respostas.
-- **Service:** concentra a lógica de negócio da aplicação.
-- **Repository:** realiza operações de persistência com Spring Data JPA.
-- **DTO:** representa os dados transferidos entre a API e seus clientes.
-- **Model:** representa as entidades persistidas no banco de dados.
-
-## ⚙️ Funcionalidades
+## Funcionalidades
 
 - Cadastro de usuários
 - Listagem de usuários
-- Consulta por ID
-- Consulta por CPF
-- Busca de usuários por nome
+- Consulta por ID e CPF
+- Busca por nome
 - Exclusão de usuários
-- Persistência de dados no PostgreSQL
 
-## 🌐 Endpoints da API
+## Endpoints
 
 | Método | Endpoint | Descrição |
 |---|---|---|
-| GET | `/user/` | Lista todos os usuários |
-| GET | `/user/{id}` | Busca usuário pelo ID |
-| GET | `/user/cpf/{cpf}` | Busca usuário pelo CPF |
-| GET | `/user/search?nome=...` | Busca usuários por nome |
+| GET | `/user/` | Lista os usuários |
+| GET | `/user/{id}` | Consulta por ID |
+| GET | `/user/cpf/{cpf}` | Consulta por CPF |
+| GET | `/user/search?nome=valor` | Busca por nome |
 | POST | `/user` | Cadastra um usuário |
 | DELETE | `/user/{id}` | Exclui um usuário |
 
-### Exemplo de cadastro
+## Estrutura do projeto
 
-**POST** `/user`
+A aplicação está organizada em camadas:
 
-```json
-{
-  "nome": "Lukas",
-  "cpf": "12345678900",
-  "endereco": "São Paulo",
-  "email": "lukas@email.com",
-  "telefone": "11999999999"
-}
-```
+- **Controller:** recebe as requisições HTTP.
+- **Service:** concentra as operações da aplicação.
+- **Repository:** realiza o acesso ao banco de dados.
+- **Model:** representa a entidade persistida.
+- **DTO:** transporta os dados entre a API e o cliente.
 
-O campo `dataCadastro` é preenchido automaticamente pela aplicação.
+## Execução
 
-## 🗄️ Banco de dados
+O projeto utiliza PostgreSQL na porta `5432`, com o banco `user_api_db`.
 
-A aplicação utiliza PostgreSQL, com esquema `users`.
-
-As alterações estruturais do banco são gerenciadas pelo Flyway, por meio de scripts SQL versionados.
-
-A migração inicial cria a tabela responsável pelo armazenamento dos usuários.
-
-## ▶️ Como executar o projeto
-
-### Pré-requisitos
-
-- JDK 21
-- Maven
-- Docker com PostgreSQL
-- Git
-- IDE Java (NetBeans, IntelliJ IDEA ou VS Code)
-
-### 1. Clonar o repositório
-
-```bash
-git clone https://github.com/lukasmatias-dev/user-api.git
-```
-
-### 2. Configurar o banco de dados
-
-Inicie uma instância do PostgreSQL na porta `5432` e crie o banco:
-
-```sql
-CREATE DATABASE user_api_db;
-```
-
-Configure a variável de ambiente `DB_PASSWORD` com a senha do PostgreSQL.
-
-A configuração atual da aplicação utiliza o usuário `postgres` e a conexão local na porta `5432`.
-
-### 3. Executar a aplicação
-
-Na pasta do projeto:
+Configure a variável de ambiente `DB_PASSWORD` com a senha do PostgreSQL e execute:
 
 ```bash
 mvn spring-boot:run
 ```
 
-A API estará disponível em:
+A API ficará disponível em `http://localhost:8080`.
 
-`http://localhost:8080`
+## Exemplo de cadastro
 
-### 4. Testar a aplicação
+**POST** `/user`
 
-Para listar os usuários, acesse:
+```json
+{
+  "nome": "João Silva",
+  "cpf": "12345678900",
+  "endereco": "São Paulo",
+  "email": "joao@email.com",
+  "telefone": "11999999999"
+}
+```
 
-`http://localhost:8080/user/`
-
-Para cadastrar usuários, envie uma requisição POST com JSON utilizando um cliente HTTP.
-
-## 📚 Aprendizados
-
-Este projeto permitiu colocar em prática conceitos importantes de desenvolvimento Backend:
-
-- Construção de APIs REST
-- Injeção de dependências
-- Arquitetura em camadas
-- Spring Data JPA e Hibernate
-- Persistência de dados relacionais
-- Migrações com Flyway
-- Integração com PostgreSQL
-- Versionamento de código com Git e GitHub
-
-## 👨‍💻 Autor
-
-**Lukas Matias**
-
-Graduado em Análise e Desenvolvimento de Sistemas, com experiência profissional em Tecnologia da Informação e foco no desenvolvimento Backend Java.
-
-[GitHub](https://github.com/lukasmatias-dev) • [LinkedIn](https://www.linkedin.com/in/lukas-matias-01201019b) • [E-mail](mailto:lukas.m4tias@gmail.com)
+A data de cadastro é preenchida automaticamente pela aplicação.
